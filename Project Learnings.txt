@@ -1,0 +1,60 @@
+Data Collected from Kaggle (https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud)
+
+There are originally 284807 rows and 31 columns 
+
+Removed the time column which is not relevant for model building
+
+Scale the 'Amount' column using StandardScaler from sklearn.preprocessing
+
+Removed duplicates
+
+Now data shape = (275663, 30)
+
+After visualizing the data using countplot of seaborn we find
+The data is highly imbalanced i.e 
+
+		0    275190
+		1       473
+
+
+Now checked how the model will behave if it's trained on imbalanced data
+
+Accuracy Score 	0.9992200678359603
+Presision Score 0.8870967741935484
+Recall Score 	0.6043956043956044
+F1 Score	0.718954248366013
+
+In order to handle the imbalanced dataset there are 2 ways 
+
+Undersampling
+Oversampling
+
+While using the undersampling method the result metrics where as follows
+
+
+	Models	Accuracy	Presision	Recall		F1
+0	LR	95.789474	100.000000	92.156863	95.918367
+1	DT	91.052632	93.814433	89.215686	91.457286
+2	RF	94.210526	98.924731	90.196078	94.358974
+
+(LR = Logistic Regression, DT = Decision Tree, RF = Random Forest)
+
+Here Logistic Regression model performed better compared to other models
+(even though the results seems good yet we cannot rely 100% on the results because there is a possibilities that important value might be removed while sampling the data)
+
+Now we use Oversampling
+By using SMOTE (Synthetic Minority Oversampling Technique)
+
+Warning - Now our data is quite large and took a while to train the data
+following are the results 
+
+	Models	Accuracy	Presision	Recall		F1
+0	LR	94.550129	97.297506	91.638638	94.383327
+1	DT	99.800138	99.747553	99.852735	99.800116
+2	RF	99.992732	99.985457	100.000000	99.992728
+
+(LR = Logistic Regression, DT = Decision Tree, RF = Random Forest)
+Here Random Forest Classifier model performed better compared to other models and took the most time too
+
+
+Finally we save the model using joblib (Name = credit_card_model)

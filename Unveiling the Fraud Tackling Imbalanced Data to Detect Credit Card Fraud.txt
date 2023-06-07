@@ -1,0 +1,25 @@
+
+Once upon a time, there was a project aimed at building a model to detect fraudulent credit card transactions. The dataset provided contained 284,807 rows and 31 columns of information. However, one column, 'Time,' was deemed irrelevant for model building and was removed from the dataset.
+
+To prepare the data for analysis, the 'Amount' column was scaled using the StandardScaler from the sklearn.preprocessing library. Additionally, any duplicate rows were removed, resulting in a new dataset shape of (275,663, 30).
+
+To gain insights into the data, the project team visualized it using a countplot from the seaborn library. They discovered that the data was highly imbalanced, with 275,190 non-fraudulent transactions (labeled as 0) and only 473 fraudulent transactions (labeled as 1).
+
+Curious about the behavior of the model when trained on imbalanced data, the team evaluated its performance using various metrics. The accuracy score achieved was 0.9992200678359603, indicating a high overall accuracy. The precision score was 0.8870967741935484, representing the proportion of true positives among all predicted positives. The recall score, which measures the proportion of actual positives correctly identified, was 0.6043956043956044. Lastly, the F1 score, a harmonic mean of precision and recall, was 0.718954248366013.
+
+Realizing the need to handle the imbalanced dataset, the team explored two approaches: undersampling and oversampling. During undersampling, they randomly reduced the majority class (non-fraudulent transactions) to balance the classes. The resulting metrics for each model were as follows:
+
+Logistic Regression: Accuracy 95.79%, Precision 100.00%, Recall 92.16%, F1 95.92%
+Decision Tree: Accuracy 91.05%, Precision 93.81%, Recall 89.22%, F1 91.46%
+Random Forest: Accuracy 94.21%, Precision 98.92%, Recall 90.20%, F1 94.36%
+Among these models, Logistic Regression performed the best. However, the team acknowledged that undersampling could potentially remove important information from the data.
+
+Moving on to oversampling, the team employed the Synthetic Minority Oversampling Technique (SMOTE). This technique creates synthetic samples for the minority class (fraudulent transactions) to balance the dataset. However, they encountered a warning due to the increased data size, which resulted in longer training times. The performance of the models using oversampling was as follows:
+
+Logistic Regression: Accuracy 94.55%, Precision 97.30%, Recall 91.64%, F1 94.38%
+Decision Tree: Accuracy 99.80%, Precision 99.75%, Recall 99.85%, F1 99.80%
+Random Forest: Accuracy 99.99%, Precision 99.99%, Recall 100.00%, F1 99.99%
+In this case, the Random Forest Classifier outperformed the other models but took the most time to train.
+
+They then retrained the model using the entire dataset to make use of all available data for future predictions and fraud detection.
+Finally, the team saved the best-performing model using the joblib library, naming it 'credit_card_model.' 
